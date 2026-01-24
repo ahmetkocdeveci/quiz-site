@@ -1,0 +1,462 @@
+/* =============================
+  GİRİŞ SAYFASI STİLLERİ
+   ============================= */
+:root {
+  --bg-primary: #f0f2f5;
+  --bg-card: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --border-color: #cccccc;
+  --input-bg: #ffffff;
+}
+
+.dark {
+  --bg-primary: #1a1a1a;
+  --bg-card: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --border-color: #404040;
+  --input-bg: #333333;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.login-card {
+  background-color: var(--bg-card);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--border-color);
+}
+
+.page-title {
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+.theme-toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+/* =============================
+   SINAV SAYFASI STİLLERİ
+   ============================= */
+.quiz-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+}
+.quiz-header {
+    background-color: var(--bg-card);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.timer-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: monospace;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.timer-critical {
+    color: #e74c3c;
+    border-color: #e74c3c;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+.quiz-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+.progress-section {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.progress-bar-track {
+    width: 100%;
+    height: 10px;
+    background-color: var(--border-color);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #007bff;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+.question-card {
+    background-color: var(--bg-card);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    width: 100%;
+    border: 1px solid var(--border-color);
+}
+
+.question-title {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-primary);
+}
+
+.option-item:hover {
+    border-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.05);
+}
+.option-selected {
+    border-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.1);
+    font-weight: 500;
+}
+
+.option-radio {
+    margin-right: 15px;
+    transform: scale(1.2);
+    accent-color: #007bff;
+    cursor: pointer;
+}
+.answer-textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.answer-textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+}
+
+.char-count {
+    text-align: right;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+.count-error { color: #e74c3c; }
+.count-success { color: #2ecc71; }
+
+.quiz-actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.btn-next {
+    width: auto;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-next:disabled {
+    background-color: var(--border-color);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+/* =============================
+   SONUÇ EKRANI STİLLERİ
+   ============================= */
+
+.result-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    box-sizing: border-box;
+}
+
+/* 1. Sonuç Kartı (Kapsayıcı) */
+.result-card {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+    padding: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-5px); /* Üzerine gelince hafif yukarı kalksın */
+}
+
+/* Başarı ve Hata Durumları için Renkler */
+.status-success .result-icon { background-color: rgba(46, 204, 113, 0.15); }
+.status-success .result-title { color: #2ecc71; }
+
+.status-fail .result-icon { background-color: rgba(231, 76, 60, 0.15); }
+.status-fail .result-title { color: #e74c3c; }
+
+/* 2. İkon ve Başlık */
+.result-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    font-size: 2.5rem;
+}
+
+.result-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+}
+
+.result-reason {
+    color: #e74c3c;
+    font-weight: 600;
+    background-color: rgba(231, 76, 60, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* 3. Puan Gösterimi */
+.score-display {
+    margin: 1.5rem 0;
+}
+
+.user-greeting {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.user-greeting strong {
+    color: var(--text-primary);
+}
+
+.score-value {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #007bff; /* Mavi Puan */
+    line-height: 1;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+}
+
+/* 4. Butonlar */
+.result-actions {
+    margin-top: 2rem;
+}
+
+.btn-restart {
+    background-color: var(--text-primary); /* Dark mode'da beyaz, light'ta siyah buton */
+    color: var(--bg-card); /* Yazı rengi kartın rengi olsun (kontrast için) */
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-size: 1rem;
+}
+
+.btn-restart:hover {
+    opacity: 0.9;
+}
+
+/* =============================
+   LİDERLİK TABLOSU (LEADERBOARD)
+   ============================= */
+
+.leaderboard-container {
+    width: 100%;
+    max-width: 700px;
+}
+
+.leaderboard-title {
+    color: var(--text-primary);
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Tablo Yapısı */
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden; /* Köşelerin yuvarlak kalması için */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+.leaderboard-table th {
+    background-color: rgba(0, 0, 0, 0.03); 
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+.leaderboard-table tr:last-child td {
+    border-bottom: none;
+}
+
+.leaderboard-table tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+.current-user-row {
+    background-color: rgba(0, 123, 255, 0.1) !important;
+    border-left: 4px solid #007bff;
+}
+
+.current-user-row td {
+    font-weight: bold;
+    color: #007bff;
+}
