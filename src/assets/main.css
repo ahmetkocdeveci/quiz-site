@@ -1,123 +1,149 @@
-/* =============================
-  GİRİŞ SAYFASI STİLLERİ
-   ============================= */
+/* =========================================
+   1. DEĞİŞKENLER VE TEMA (DARK/LIGHT MODE)
+   ========================================= */
 :root {
-  --bg-primary: #f0f2f5;
-  --bg-card: #ffffff;
-  --text-primary: #333333;
-  --text-secondary: #666666;
-  --border-color: #cccccc;
-  --input-bg: #ffffff;
+    /* Varsayılan (Light Mode) Renkleri */
+    --bg-primary: #f0f2f5;       /* Sayfa arka planı */
+    --bg-card: #ffffff;          /* Kart arka planı */
+    --text-primary: #333333;     /* Ana yazı rengi */
+    --text-secondary: #666666;   /* Alt yazı rengi */
+    --border-color: #cccccc;     /* Çerçeve rengi */
+    --input-bg: #ffffff;         /* Input içi */
+    --shadow-color: rgba(0,0,0,0.1);
 }
 
+/* Dark Class'ı eklendiğinde devreye girecek renkler */
 .dark {
-  --bg-primary: #1a1a1a;
-  --bg-card: #2d2d2d;
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --border-color: #404040;
-  --input-bg: #333333;
+    --bg-primary: #1a1a1a;       /* Koyu Siyah */
+    --bg-card: #2d2d2d;          /* Koyu Gri */
+    --text-primary: #ffffff;     /* Beyaz */
+    --text-secondary: #a0a0a0;   /* Açık Gri */
+    --border-color: #404040;     /* Koyu Çerçeve */
+    --input-bg: #333333;         /* Input içi */
+    --shadow-color: rgba(0,0,0,0.3);
 }
+
+/* =========================================
+   2. GENEL AYARLAR
+   ========================================= */
 body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+button {
+    font-family: inherit;
+}
+
+/* =========================================
+   3. GİRİŞ SAYFASI (LOGIN VIEW)
+   ========================================= */
 .login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: var(--bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    position: relative; /* Buton konumu için */
 }
 
 .login-card {
-  background-color: var(--bg-card);
-  padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid var(--border-color);
 }
 
 .page-title {
-  color: var(--text-primary);
-  text-align: center;
-  margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 0.5rem;
 }
 
 .page-subtitle {
-  color: var(--text-secondary);
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
 }
+
+/* Form Elemanları */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
 .form-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: var(--text-primary);
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
 .form-input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  background-color: var(--input-bg);
-  color: var(--text-primary);
-  box-sizing: border-box;
-  font-size: 14px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    box-sizing: border-box;
+    font-size: 14px;
 }
+
 .btn-primary {
-  background-color: #007bff;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  width: 100%;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s;
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
+
+/* Tema Butonu (Sağ Üst) */
 .theme-toggle-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 10px 15px;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 14px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    z-index: 1000; /* En üstte kalması için kritik */
 }
-/* =============================
-   SINAV SAYFASI STİLLERİ
-   ============================= */
+
+/* =========================================
+   4. SINAV SAYFASI (QUIZ VIEW)
+   ========================================= */
 .quiz-page {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     background-color: var(--bg-primary);
 }
+
+/* Header & Timer */
 .quiz-header {
     background-color: var(--bg-card);
     padding: 1rem 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px var(--shadow-color);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -151,6 +177,8 @@ body {
     50% { opacity: 0.5; }
     100% { opacity: 1; }
 }
+
+/* İçerik Alanı */
 .quiz-content {
     flex: 1;
     display: flex;
@@ -162,6 +190,8 @@ body {
     width: 100%;
     box-sizing: border-box;
 }
+
+/* Progress Bar */
 .progress-section {
     width: 100%;
     margin-bottom: 2rem;
@@ -190,11 +220,13 @@ body {
     border-radius: 5px;
     transition: width 0.5s ease;
 }
+
+/* Soru Kartı */
 .question-card {
     background-color: var(--bg-card);
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px var(--shadow-color);
     width: 100%;
     border: 1px solid var(--border-color);
 }
@@ -205,6 +237,8 @@ body {
     margin-bottom: 1.5rem;
     line-height: 1.4;
 }
+
+/* Şıklar (Radio & Checkbox) */
 .options-list {
     display: flex;
     flex-direction: column;
@@ -226,6 +260,7 @@ body {
     border-color: #007bff;
     background-color: rgba(0, 123, 255, 0.05);
 }
+
 .option-selected {
     border-color: #007bff;
     background-color: rgba(0, 123, 255, 0.1);
@@ -238,6 +273,8 @@ body {
     accent-color: #007bff;
     cursor: pointer;
 }
+
+/* Açık Uçlu (Textarea) */
 .answer-textarea {
     width: 100%;
     min-height: 150px;
@@ -268,6 +305,7 @@ body {
 .count-error { color: #e74c3c; }
 .count-success { color: #2ecc71; }
 
+/* Aksiyon Butonları */
 .quiz-actions {
     margin-top: 2rem;
     display: flex;
@@ -284,16 +322,17 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .btn-next:disabled {
     background-color: var(--border-color);
     color: var(--text-secondary);
     cursor: not-allowed;
     opacity: 0.7;
 }
-/* =============================
-   SONUÇ EKRANI STİLLERİ
-   ============================= */
 
+/* =========================================
+   5. SONUÇ EKRANI (RESULT VIEW)
+   ========================================= */
 .result-page {
     display: flex;
     flex-direction: column;
@@ -304,11 +343,10 @@ body {
     box-sizing: border-box;
 }
 
-/* 1. Sonuç Kartı (Kapsayıcı) */
 .result-card {
     background-color: var(--bg-card);
     border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px var(--shadow-color);
     width: 100%;
     max-width: 500px;
     padding: 2.5rem;
@@ -319,17 +357,16 @@ body {
 }
 
 .result-card:hover {
-    transform: translateY(-5px); /* Üzerine gelince hafif yukarı kalksın */
+    transform: translateY(-5px);
 }
 
-/* Başarı ve Hata Durumları için Renkler */
+/* Başarı Durumları */
 .status-success .result-icon { background-color: rgba(46, 204, 113, 0.15); }
 .status-success .result-title { color: #2ecc71; }
 
 .status-fail .result-icon { background-color: rgba(231, 76, 60, 0.15); }
 .status-fail .result-title { color: #e74c3c; }
 
-/* 2. İkon ve Başlık */
 .result-icon {
     width: 80px;
     height: 80px;
@@ -355,7 +392,6 @@ body {
     border-radius: 8px;
 }
 
-/* 3. Puan Gösterimi */
 .score-display {
     margin: 1.5rem 0;
 }
@@ -373,19 +409,14 @@ body {
 .score-value {
     font-size: 4rem;
     font-weight: 900;
-    color: #007bff; /* Mavi Puan */
+    color: #007bff;
     line-height: 1;
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
-}
-
-/* 4. Butonlar */
-.result-actions {
-    margin-top: 2rem;
+    text-shadow: 2px 2px 0px var(--shadow-color);
 }
 
 .btn-restart {
-    background-color: var(--text-primary); /* Dark mode'da beyaz, light'ta siyah buton */
-    color: var(--bg-card); /* Yazı rengi kartın rengi olsun (kontrast için) */
+    background-color: var(--text-primary);
+    color: var(--bg-card);
     padding: 12px 24px;
     border: none;
     border-radius: 8px;
@@ -399,10 +430,9 @@ body {
     opacity: 0.9;
 }
 
-/* =============================
-   LİDERLİK TABLOSU (LEADERBOARD)
-   ============================= */
-
+/* =========================================
+   6. LİDERLİK TABLOSU
+   ========================================= */
 .leaderboard-container {
     width: 100%;
     max-width: 700px;
@@ -413,19 +443,15 @@ body {
     text-align: center;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
-    position: relative;
-    display: inline-block;
-    width: 100%;
 }
 
-/* Tablo Yapısı */
 .leaderboard-table {
     width: 100%;
     border-collapse: collapse;
     background-color: var(--bg-card);
     border-radius: 12px;
-    overflow: hidden; /* Köşelerin yuvarlak kalması için */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+    box-shadow: 0 4px 6px var(--shadow-color);
     border: 1px solid var(--border-color);
 }
 
@@ -436,21 +462,20 @@ body {
     border-bottom: 1px solid var(--border-color);
     color: var(--text-primary);
 }
+
 .leaderboard-table th {
-    background-color: rgba(0, 0, 0, 0.03); 
+    background-color: rgba(0, 0, 0, 0.03);
     font-weight: 700;
     text-transform: uppercase;
     font-size: 0.85rem;
-    letter-spacing: 0.5px;
     color: var(--text-secondary);
-}
-.leaderboard-table tr:last-child td {
-    border-bottom: none;
 }
 
 .leaderboard-table tr:hover {
     background-color: rgba(0, 0, 0, 0.02);
 }
+
+/* Senin Skorun */
 .current-user-row {
     background-color: rgba(0, 123, 255, 0.1) !important;
     border-left: 4px solid #007bff;
@@ -459,4 +484,114 @@ body {
 .current-user-row td {
     font-weight: bold;
     color: #007bff;
+}
+
+/* =========================================
+   7. CEVAP ANAHTARI (REVIEW) STİLLERİ
+   ========================================= */
+.review-container {
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 3rem;
+}
+
+.review-title {
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.review-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 6px solid transparent;
+}
+
+/* Durum Renkleri */
+.status-correct {
+    border-left-color: #2ecc71; /* Yeşil */
+    background-color: rgba(46, 204, 113, 0.05);
+}
+
+.status-wrong {
+    border-left-color: #e74c3c; /* Kırmızı */
+    background-color: rgba(231, 76, 60, 0.05);
+}
+
+.status-empty {
+    border-left-color: #f1c40f; /* Sarı */
+    background-color: rgba(241, 196, 15, 0.05);
+}
+
+.status-neutral {
+    border-left-color: #95a5a6; /* Gri (Nötr) */
+    background-color: rgba(149, 165, 166, 0.05);
+}
+
+/* Kart İçeriği */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.review-q-num {
+    font-weight: bold;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.review-badge, .review-badge-neutral {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-correct .review-badge { background: #2ecc71; color: white; }
+.status-wrong .review-badge { background: #e74c3c; color: white; }
+.status-empty .review-badge { background: #f1c40f; color: black; }
+
+.review-badge-neutral {
+    background: #95a5a6;
+    color: white;
+}
+
+.review-question-text {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.review-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: var(--bg-primary);
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.user-answer-box, .correct-answer-box {
+    display: flex;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.correct-answer-box {
+    color: #27ae60;
+}
+
+.note-box {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 5px;
 }
