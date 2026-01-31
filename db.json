@@ -1,0 +1,82 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "multiple-choice",
+      "text": "Recep İvedik İstanbul'un hangi semtinde oturmaktadır?",
+      "options": ["Bağcılar", "Güngören", "Esenler", "Zeytinburnu"],
+      "correctAnswer": "Güngören",
+      "points": 10
+    },
+    {
+      "id": 2,
+      "type": "multiple-choice",
+      "text": "Recep İvedik'in kullandığı o meşhur arabanın modeli nedir?",
+      "options": ["Murat 131", "Renault Toros", "Fiat Bis", "Tofaş Şahin"],
+      "correctAnswer": "Fiat Bis",
+      "points": 10
+    },
+    {
+      "id": 3,
+      "type": "multiple-choice",
+      "text": "Recep İvedik'in en sevdiği yemek hangisidir?",
+      "options": ["Mantı", "Kuru Fasulye", "Lahmacun", "İskender"],
+      "correctAnswer": "Kuru Fasulye",
+      "points": 10
+    },
+    {
+      "id": 4,
+      "type": "multiple-choice",
+      "text": "Recep İvedik 1 filminde Recep, Sibel'i bulmak için hangi şehre gitmiştir?",
+      "options": ["Antalya", "İzmir", "Muğla", "Bodrum"],
+      "correctAnswer": "Antalya",
+      "points": 10
+    },
+    {
+      "id": 5,
+      "type": "multiple-choice",
+      "text": "Recep İvedik'in çocukluk arkadaşı olan şoförün adı nedir?",
+      "options": ["Salih", "Mahmut", "Ali Kerem", "Nurullah"],
+      "correctAnswer": "Nurullah",
+      "points": 10
+    },
+    {
+      "id": 6,
+      "type": "multiple-selection",
+      "text": "Recep İvedik'in belirgin fiziksel ve kişisel özellikleri nelerdir? (Birden fazla seçiniz)",
+      "options": ["Agresif", "Sakin", "Kıllı", "Romantik", "Nazik", "Kompleksli", "Kedi gibi"],
+      "correctAnswer": ["Agresif", "Kıllı", "Kompleksli", "Kedi gibi"],
+      "points": 10
+    },
+    {
+      "id": 7,
+      "type": "multiple-selection",
+      "text": "Recep İvedik filmlerinde aşağıdaki aktivitelerden hangilerini yapmıştır? (Birden fazla seçiniz)",
+      "options": ["Yoga", "Bale", "Paintball", "Golf"],
+      "correctAnswer": ["Yoga", "Paintball"],
+      "points": 10
+    },
+    {
+      "id": 8,
+      "type": "multiple-selection",
+      "text": "Aşağıdakilerden hangileri Recep İvedik filmlerinde yer almış karakterlerdir? (Birden fazla seçiniz)",
+      "options": ["Sibel", "Behzat Ç.", "Ali Kerem", "Polat Alemdar"],
+      "correctAnswer": ["Sibel", "Ali Kerem"],
+      "points": 10
+    },
+    {
+      "id": 9,
+      "type": "open-ended",
+      "text": "Recep İvedik'in sürekli giydiği gömleğin rengi nedir?",
+      "minLength": 5,
+      "points": 10
+    },
+    {
+      "id": 10,
+      "type": "open-ended",
+      "text": "Recep İvedik'in meşhur gülüşünü yazıyla ifade ediniz.",
+      "minLength": 3,
+      "points": 10
+    }
+  ]
+}

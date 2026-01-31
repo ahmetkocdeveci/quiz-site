@@ -1,108 +1,109 @@
 <script setup>
-import { reactive, ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { useQuizStore } from '../stores/quiz'
+import { reactive, onMounted, ref } from 'vue';
+import { useQuizStore } from '../stores/quiz';
+import { useRouter } from 'vue-router';
 
-const router = useRouter()
-const store = useQuizStore()
+const store = useQuizStore();
+const router = useRouter();
 
-// --- TEMA (DARK MODE) AYARLARI ---
-const isDarkMode = ref(false)
+const formData = reactive({
+  name: '',
+  surname: '',
+  tckn: ''
+});
 
-const toggleTheme = () => {
-  isDarkMode.value = !isDarkMode.value
-
-  if (isDarkMode.value) {
-    document.documentElement.classList.add('dark')
-    localStorage.setItem('theme', 'dark')
-  } else {
-    document.documentElement.classList.remove('dark')
-    localStorage.setItem('theme', 'light')
-  }
-}
-
-// --- FORM VE GİRİŞ AYARLARI ---
-const formData = reactive({ name: '', surname: '', tckn: '' })
+const isDark = ref(false);
 
 onMounted(() => {
-  if (store.checkRefreshViolation()) {
-    alert(`HATA: ERR_REFRESH_VIOLATION\n\n${store.invalidReason}`)
-  }
-  const savedTheme = localStorage.getItem('theme')
+  const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
-    document.documentElement.classList.add('dark')
-    isDarkMode.value = true
+    isDark.value = true;
+    document.documentElement.classList.add('dark');
   }
-})
+});
 
-const handleLogin = () => {
+const toggleTheme = () => {
+  isDark.value = !isDark.value;
+  if (isDark.value) {
+    document.documentElement.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+  }
+};
+const handleLogin = async () => {
   if (!formData.name || !formData.surname || !formData.tckn) {
-    alert("HATA: ERR_EMPTY_FIELDS\n\nLütfen tüm alanları doldurunuz.")
-    return
+    alert('Lütfen tüm alanları doldurunuz.');
+    return;
   }
-  const tcknRegex = /^\d{11}$/
-  if (!tcknRegex.test(formData.tckn)) {
-    alert("HATA: ERR_TCKN_INVALID\n\nTC Kimlik Numarası 11 haneli rakamlardan oluşmalıdır.")
-    return
+
+  if (!/^\d{11}$/.test(formData.tckn)) {
+    alert('TCKN 11 haneli olmalı ve sadece rakamlardan oluşmalıdır.');
+    return;
   }
-  const history = JSON.parse(localStorage.getItem('quizHistory') || '[]')
-  const existingUser = history.find((record) => record.tckn === formData.tckn)
+
+  const history = JSON.parse(localStorage.getItem('quizHistory') || '[]');
+  const existingUser = history.find(record => record.tckn === formData.tckn);
 
   if (existingUser) {
-    alert("HATA: ERR_DUPLICATE_ENTRY\n\nBu TC Kimlik Numarası ile daha önce sınava katılım sağlanmıştır.")
-    return
+    alert('Bu TCKN ile daha önce sınava girilmiş!');
+    return;
   }
-  store.startExam({ ...formData })
-  router.push('/quiz')
-}
+  await store.startExam({ ...formData });
+  if (!store.error) {
+    router.push('/quiz');
+  }
+};
 </script>
 
 <template>
   <div class="login-page">
-    <button @click="toggleTheme" class="theme-toggle-btn">
-      <span v-if="isDarkMode">☀️ Aydınlık Mod</span>
-      <span v-else>🌙 Karanlık Mod</span>
+    <button @click="toggleTheme" class="theme-btn">
+      {{ isDark ? '☀️ Light Mode' : '🌙 Dark Mode' }}
     </button>
 
     <div class="login-card">
-      <div class="login-header">
-        <h1 class="page-title">Bilgi Yarışması</h1>
-        <p class="page-subtitle">Giriş yapmak için bilgilerinizi giriniz.</p>
-      </div>
+      <h1 class="login-card__title">Online Sınav Sistemi</h1>
+      <p class="login-card__subtitle">Lütfen giriş bilgilerinizi eksiksiz doldurunuz.</p>
 
-      <form @submit.prevent="handleLogin" class="login-form">
-        <div class="form-group">
-          <label class="form-label">Adınız</label>
+      <form @submit.prevent="handleLogin">
+        <div class="login-card__group">
+          <label class="login-card__label">Adınız</label>
           <input
             v-model="formData.name"
             type="text"
-            class="form-input"
-            placeholder="Adınızı giriniz"
-          />
+            class="login-card__input"
+            placeholder="Örn: Ahmet"
+            required
+          >
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Soyadınız</label>
+        <div class="login-card__group">
+          <label class="login-card__label">Soyadınız</label>
           <input
             v-model="formData.surname"
             type="text"
-            class="form-input"
-            placeholder="Soyadınızı giriniz"
-          />
+            class="login-card__input"
+            placeholder="Örn: Yılmaz"
+            required
+          >
         </div>
 
-        <div class="form-group">
-          <label class="form-label">TC Kimlik No</label>
+        <div class="login-card__group">
+          <label class="login-card__label">TC Kimlik No</label>
           <input
             v-model="formData.tckn"
             type="text"
+            class="login-card__input"
+            placeholder="11 haneli TCKN"
             maxlength="11"
-            class="form-input"
-            placeholder="11 haneli numara"
-          />
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            required
+          >
         </div>
 
-        <button type="submit" class="btn-primary btn-start">Sınavı Başlat</button>
+        <button type="submit" class="btn btn--primary">Sınavı Başlat</button>
       </form>
     </div>
   </div>

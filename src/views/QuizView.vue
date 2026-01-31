@@ -4,19 +4,21 @@ import { useQuizStore } from '../stores/quiz';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
+import QuizHeader from '../components/QuizHeader.vue';
+import QuizProgress from '../components/QuizProgress.vue';
+import QuestionCard from '../components/QuestionCard.vue';
+
 const store = useQuizStore();
 const router = useRouter();
-const { currentQuestion, currentQuestionIndex, questions, timer, isFinished } = storeToRefs(store);
+const { currentQuestion, currentQuestionIndex, questions, isFinished } = storeToRefs(store);
 
-// Cevap değişkeni (Array veya String olabilir)
 const answer = ref('');
 
-// Soru değişince cevap alanını sıfırla ve türe göre ayarla
 watch(currentQuestion, (newQuestion) => {
   if (newQuestion.type === 'multiple-selection') {
-    answer.value = []; // Çoklu seçimse boş liste
+    answer.value = [];
   } else {
-    answer.value = ''; // Diğerleriyse boş yazı
+    answer.value = '';
   }
 });
 
@@ -39,16 +41,6 @@ const canProceed = computed(() => {
   return false;
 });
 
-const progressPercentage = computed(() => {
-  return ((currentQuestionIndex.value + 1) / questions.value.length) * 100;
-});
-
-const formattedTime = computed(() => {
-  const m = Math.floor(timer.value / 60);
-  const s = timer.value % 60;
-  return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-});
-
 const handleNext = () => {
   const finalAnswer = Array.isArray(answer.value) ? [...answer.value] : answer.value;
   store.saveAnswer(finalAnswer);
@@ -58,86 +50,25 @@ const handleNext = () => {
 
 <template>
   <div class="quiz-page">
-
-    <header class="quiz-header">
-      <div class="timer-container" :class="{ 'timer-critical': timer < 60 }">
-        <span class="timer-icon">⏱️</span>
-        <span class="timer-text">{{ formattedTime }}</span>
-      </div>
-    </header>
+    <QuizHeader />
 
     <main class="quiz-content">
+      <QuizProgress />
 
-      <div class="progress-section">
-        <div class="progress-info">
-          <span>Soru {{ currentQuestionIndex + 1 }} / {{ questions.length }}</span>
-        </div>
-        <div class="progress-bar-track">
-          <div class="progress-bar-fill" :style="{ width: `${progressPercentage}%` }"></div>
-        </div>
-      </div>
-
-      <div class="question-card">
-        <h2 class="question-title">{{ currentQuestion.text }}</h2>
-
-        <div v-if="currentQuestion.type === 'multiple-choice'" class="options-list">
-          <label
-            v-for="(option, index) in currentQuestion.options"
-            :key="index"
-            class="option-item"
-            :class="{ 'option-selected': answer === option }"
-          >
-            <input
-              type="radio"
-              :name="'question-' + currentQuestion.id"
-              :value="option"
-              v-model="answer"
-              class="option-radio"
-            >
-            <span class="option-text">{{ option }}</span>
-          </label>
-        </div>
-
-        <div v-else-if="currentQuestion.type === 'multiple-selection'" class="options-list">
-          <label
-            v-for="(option, index) in currentQuestion.options"
-            :key="index"
-            class="option-item"
-            :class="{ 'option-selected': answer.includes(option) }"
-          >
-            <input
-              type="checkbox"
-              :value="option"
-              v-model="answer"
-              class="option-radio"
-            >
-            <span class="option-text">{{ option }}</span>
-          </label>
-          <p class="text-sm text-gray-500 mt-2 italic">* Birden fazla seçenek işaretleyebilirsiniz.</p>
-        </div>
-
-        <div v-else-if="currentQuestion.type === 'open-ended'" class="open-ended-area">
-          <textarea
-            v-model="answer"
-            class="answer-textarea"
-            placeholder="Cevabınızı buraya yazınız..."
-          ></textarea>
-          <div class="char-count" :class="answer.length < currentQuestion.minLength ? 'count-error' : 'count-success'">
-            {{ answer.length }} / {{ currentQuestion.minLength }} karakter
-          </div>
-        </div>
-      </div>
+      <QuestionCard
+        :question="currentQuestion"
+        v-model="answer"
+      />
 
       <div class="quiz-actions">
         <button
           @click="handleNext"
           :disabled="!canProceed"
-          class="btn-primary btn-next"
+          class="btn btn--primary btn--next"
         >
           {{ currentQuestionIndex === questions.length - 1 ? 'Sınavı Bitir' : 'Sonraki Soru' }}
         </button>
       </div>
-
     </main>
   </div>
 </template>
