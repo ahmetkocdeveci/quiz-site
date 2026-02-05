@@ -4,8 +4,10 @@ import { ref, reactive, computed } from 'vue'
 export const useQuizStore = defineStore('quiz', () => {
   const examStarted = ref(false)
   const isFinished = ref(false)
-  const timer = ref(300)
+
+  const timer = ref(null)
   const timerInterval = ref(null)
+
   const currentQuestionIndex = ref(0)
   const isInvalid = ref(false)
   const invalidReason = ref('')
@@ -69,9 +71,34 @@ export const useQuizStore = defineStore('quiz', () => {
     }
   }
 
+  function setupQuestionTimer() {
+    clearInterval(timerInterval.value)
+    timerInterval.value = null
+
+    const q = currentQuestion.value
+
+    if (q && q.duration) {
+      timer.value = q.duration
+
+      timerInterval.value = setInterval(() => {
+        if (timer.value > 0) {
+          timer.value--
+        } else {
+          handleTimeUp()
+        }
+      }, 1000)
+    } else {
+      timer.value = null
+    }
+  }
+
+  function handleTimeUp() {
+    clearInterval(timerInterval.value)
+    nextQuestion()
+  }
+
   async function startExam(userData) {
     Object.assign(user, userData)
-
     await fetchQuestions()
 
     if (error.value) {
@@ -82,6 +109,7 @@ export const useQuizStore = defineStore('quiz', () => {
     examStarted.value = true
     isInvalid.value = false
     invalidReason.value = ''
+    currentQuestionIndex.value = 0
 
     localStorage.setItem('exam_ongoing', 'true')
     localStorage.setItem('exam_backup', JSON.stringify(userData))
@@ -89,7 +117,7 @@ export const useQuizStore = defineStore('quiz', () => {
     window.addEventListener('offline', handleOffline)
     window.addEventListener('beforeunload', handleBeforeUnload)
 
-    startTimer()
+    setupQuestionTimer()
   }
 
   function finishExam(success) {
@@ -141,16 +169,6 @@ export const useQuizStore = defineStore('quiz', () => {
     e.returnValue = ''
   }
 
-  function startTimer() {
-    timerInterval.value = setInterval(() => {
-      if (timer.value > 0) {
-        timer.value--
-      } else {
-        finishExam(false)
-      }
-    }, 1000)
-  }
-
   function saveAnswer(answer) {
     if (!currentQuestion.value) return
     const questionId = currentQuestion.value.id
@@ -160,6 +178,7 @@ export const useQuizStore = defineStore('quiz', () => {
   function nextQuestion() {
     if (!isLastQuestion.value) {
       currentQuestionIndex.value++
+      setupQuestionTimer()
     } else {
       finishExam(true)
     }
@@ -215,7 +234,7 @@ export const useQuizStore = defineStore('quiz', () => {
     localStorage.removeItem('last_exam_result')
     examStarted.value = false
     isFinished.value = false
-    timer.value = 300
+    timer.value = null
     currentQuestionIndex.value = 0
     isInvalid.value = false
     invalidReason.value = ''
@@ -248,7 +267,6 @@ export const useQuizStore = defineStore('quiz', () => {
     startExam,
     handleOffline,
     handleBeforeUnload,
-    startTimer,
     saveAnswer,
     nextQuestion,
     finishExam,
